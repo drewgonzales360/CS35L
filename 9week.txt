@@ -1,0 +1,9 @@
+################################################################################
+Week 9:
+
+- The	process	of	linking	(What	is	a linker’s	job?)
+- Difference	between	static	and	dynamic	linking (pros	and	cons	of	each)
+- How	to	create	static	library	vs.	shared	library
+- Difference	between	dynamic	linking	and	dynamic	loading
+- Dynamic	Loading	API	(dlopen,	dlsym,	dlerror,	dlclose)
+################################################################################

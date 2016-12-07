@@ -1,0 +1,33 @@
+################################################################################
+Week 8
+- Difference	between	multitasking	and	multithreading (advantages/disadvantages	of	each)
+- Difference	between	a	thread	and	a	process
+- Race	conditions	and	thread	synchronization (what	are	race	conditions?	What’s	the	purpose	of
+  synchronization	methods?	Are	there	any	synchronization	methods	we	discussed	in	class?)
+- pthreads	interface	(pthread_create,	pthread_join)
+- Need	to	be	able	to	parallelize	a	program
+################################################################################
+
+Multitasking
+  Several processes are scheduled alternately or possibly
+  simultaneously on a multiprocessing system
+
+Multithreading
+  Same job is broken logically into pieces (threads) which
+  may be executed simultaneously on a multiprocessing
+  system
+
+Each thread gets Global Data, Code, Heap, Stack
+int pthread_create( pthread_t *tid, const pthread_attr_t *attr,
+  void *(my_function)(void *), void *arg );
+
+
+
+tid:
+  unique identifier for newly created thread
+attr:
+  object that holds thread attributes (e.g. stacksize) Pass in NULL for default attributes
+my_function:
+  function that thread will execute once it is created
+arg:
+  a single argument that may be passed to my_function. Pass in NULL if no arguments

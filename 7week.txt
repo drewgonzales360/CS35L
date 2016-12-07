@@ -1,0 +1,37 @@
+################################################################################
+Protection	mechanism	(dual	modes:	user	mode,	kernel	mode. Why	does	dual	mode	operation
+exist?)
+- What	are	system	calls?
+- Disadvantage	of	system	calls
+- Library	calls	vs.	system	calls	(getchar/putchar	vs.	read/write)
+################################################################################
+
+System calls are function calls that the user space makes to kernel do do things
+that the user can't do like I/O, Exception handling, etc.
+
+The kernel has unrestricted acces to every resource becase the mode bit says 0.
+The kernel can execute any CPU instruction, but the User cannot
+The kernel allocates resources to each process user to assure fairness for
+each process.
+
+Prevents any process from using any resource for too long.
+I/O, Memory, CPU
+
+System Call
+  Used by user level processes to request a service from the kernel.
+  Change the CPu mode from user to kernel
+  Is a part of the Kernel, of the OS
+  This is the only way a user program can perform priveledged operations
+
+When  system call is made the context switches the programe being executed is
+interrupted.
+
+To avoid syscalls
+  getchar putchar, because read() and write() are syscalls.
+  fopen fclose because open and close are syscalls
+
+
+Unbuffered
+  everybye is read from a syscall - really slow
+Buffered
+  read blocks of bytes from a syscall - faster, ya

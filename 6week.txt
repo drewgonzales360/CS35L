@@ -1,0 +1,85 @@
+################################################################################
+Week 6
+SSH protocol	steps (Where	is	the	symmetric/asymmetric	encryption	happening?)
+- How	does	SSH	guarantee	confidentiality	and	authentication?
+- Symmetric	key	cryptography (what	is	it?	How	does	it	work?)
+- Asymmetric	key	cryptography	(private/public	keys)
+- Digital	signatures (how	do	they	work?	How	do	they	guarantee	data	integrity?)
+- In	SSH,	the	key	used	for	encryption	is	the	receiver’s	public key.	When	creating	a	digital	signature,	
+  the	key	used	for	encryption	is	the	sender’s	private	key.	Why?
+- Digital	certificates	(How	do	they	work?	Why	are	they	used?)
+################################################################################
+	# Check if you even have OpenSSH
+		dpkg --get-selections | grep openssh
+
+	sudo apt-get install openssh-server
+	sudo apt-get install openssh-client
+
+	# This will generate a key and save it to /home/drew/.ssh/id_rsa
+	# There is no password on it
+	ssh-keygen
+
+	-d, --home-dir HOME_DIR
+	The new user will be created using HOME_DIR as the value
+	-for the user's login directory. The default is to append the LOGIN name to
+	-BASE_DIR and use that as the login directory name. The directory HOME_DIR does
+	-not have to exist but will not be created if it is missing.
+  -the home directory will have a desktop.ini, Documents, Pictures, Music
+    etc folders in it.
+	A home directory has to be associated with the new user added.
+
+  # Creates a key and saves it to ~/.ssh/id_rsa
+    ssh-keygen
+
+  # Make the new home directory for oracle. This will be the entry point for
+  # oracle. The .ssh is needed for the passwordless login. That took me a while
+  # to figure out.
+    mkdir ~/Documents/oracle
+    mkdir ~/Documents/oracle/.ssh
+
+
+  # Create the user, and set its home directory.
+    sudo useradd -d ~/Documents/oracle -m oracle
+
+  # Create oracles password
+    sudo passwd oracle
+
+  # Now that oracle is a user, change the home directory to oracles. I have to do
+  # this because when I'm logging in from the client for the first time, I'm going
+  # to do the ssh-copy-id and I need the .ssh to be owned by oracle, otherwise
+  # I'll get permission denied by the server.
+    chown -R oracle ~/Documents/oracle
+    chown -R oracle ~/Documents/oracle/.ssh
+
+  # Remove password authentication. This is super dangerous and I don't like it
+  # but whatever. PasswordAthentication no
+    sudo emacs /etc/ssh/sshd_config
+
+  # Creates a key and saves it to ~/.ssh/id_rsa
+    ssh-keygen
+
+  # This will copy my password 'keygen' to to ~/Documents/oracle/.ssh on the
+  # server. I think...
+    ssh-copy-id –i oracle@192.168.1.7
+
+  # SSH into the server
+    ssh -X oracle@192.168.1.7
+
+  # Was not prompted for password. Then opened xterm.
+    xterm
+
+  # Note that this can only be done for ubuntu systems. I have a bash shell on my
+  # windows 10 machine and X11 forwarding will not work
+================================================================================
+  Notes from slides
+
+  Data encrypted with public key can only be decrypted by private key and vice versa
+
+  Bob -> Bob's Private Key -> Encrypted Message -> Bob's Public Key -> Alice
+  Bob <- Alice's Public Key <- Encrypted Message <- Alice's Private Key <- Alice
+
+  When you ssh onto a big server, you download the public key belonging to that
+  server and save it on your(client) local drive. Then when you go back, you check
+  that the public key you saved before matches the server you're about to SSH
+  into. This way you know you're going to the right server.
+================================================================================
