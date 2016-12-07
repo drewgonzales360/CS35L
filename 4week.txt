@@ -1,0 +1,68 @@
+################################################################################
+Week 4
+Git	version	control
+o Centralized	vs.	distributed VCS
+o Objects	in	git	architecture	(blob,	tree,	commit,	tag)
+o 2	ways	to	create	a	version	controlled	project	(git	init,	git	clone)
+o Git	commands:	commit,	checkout,	branch
+o Why	do	you	have	to	add	then	commit?
+o What’s	a	branch?	A	pointer	to	a	commit	object.
+o Default	branch?	Master.	Keeps	moving	each	time	a	commit	is	added
+o How	to	create	a	new	branch.	Why	is	it	useful?
+################################################################################
+
+
+================================================================================
+Centralized
+  One place for whole repo
+  Changes are updated and put on the repo.
+  Pros:
+    Everyone can see changes at the same time
+    Simple to design
+  Cons:
+    No backups of repo
+
+Distributed
+  Each developer gets the full history of a project on their own hard drive
+  Developers can communicate changes between each other without going through a
+  central server
+
+  Pros:
+    Don't have to share all code at once,
+    Commands run fast because they are local.
+
+  Cons:
+    Have to download WHOLE repo.
+
+================================================================================
+Objects	in	git	architecture	(blob,	tree,	commit,	tag)
+head
+  Reference to a commit object
+HEAD
+  reference to the currently checked out commit object
+Master
+  Default head name that git creates when the repository is initialized.
+
+# show differences between the working copy and the staged files in index.
+# if everything is staged, then this will show no differences.
+git diff
+
+# This will show the differences between working directory and last commit
+git diff HEAD
+
+# revert a commit back
+git revert
+
+================================================================================
+Git checkout
+  If you just checkout a file, you undo the changes made to the file if they've
+  been added to the index(stage)
+
+  #  list all branches
+  git branch
+
+  # switch branches
+  get checkout <branchName>
+
+  # make a new branch
+  git branch <branchName>

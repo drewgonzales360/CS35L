@@ -1,0 +1,65 @@
+################################################################################
+Kenneth Drew Gonzales
+
+emacsSheet.txt:
+Heres a short cheat sheet for basic operations with emacs
+################################################################################
+Quit command				C-g
+
+================================================================================
+Moving Around
+================================================================================
+Up					           C-p
+Down					         C-n
+Foward					         C-f
+Backward				        C-b
+Jump to line				    M-g M-g
+Line mode				M-x linum-mode
+Move page down				C-v
+Move page up				M-v
+
+
+
+================================================================================
+Editing
+================================================================================
+Copy					M-w
+Cut					C-w
+Paste 					C-y
+Undo 					C-/
+Delete					C-d
+Make Selection				C-SPC
+AutoComplete				M-/
+
+================================================================================
+AutoComplete
+================================================================================
+Turn AutoComplete Package On		M-x auto-complete-mode
+Look at next suggestion	  		M-n
+Look at previous suggestion		M-p
+
+
+================================================================================
+Finding
+================================================================================
+Search					C-s
+Search and Replace			C-%
+
+
+
+================================================================================
+File IO
+================================================================================
+Open File				C-x C-f
+Save File				C-x C-s
+Close emacs				C-x C-c
+Compile with makefile			M-x compile
+
+
+================================================================================
+Windows
+================================================================================
+Open Window Right			C-x 3
+Open Window Down			C-x 2
+Close Current Window			C-x 0
+Change Window 				C-x o

@@ -1,0 +1,113 @@
+################################################################################
+Week 2:
+
+- Regular	expressions	and	wildcards
+  o 4	concepts	of	regular	expression	and	symbols	associated	with	them
+  o Difference	between	basic	regular	expressions	and	extended	regular	expressions
+- Advanced	Linux	commands:
+  o grep (difference	between	grep,	egrep,	fgrep)
+  o sed (substitution	command,	backreferencing)
+  o tr
+- Bash	scripting	(a	lot	of	material	here):
+  o different	constructs:	for	loops,	while	loops,	if	statements
+  o declaring	and	referencing	variables,	environment	variables,	etc.
+  o built-in	variable:	#,	?,	IFS,	1,	2,	etc.
+  o Types	of	quotes:	Single	vs.	double	quotes vs.	back	ticks
+- Links	(hard	links	vs.	symbolic	links,	ln	command)
+################################################################################
+
+================================================================================
+Regular Expressions and Wildcards
+
+In basic regular expressions the meta-characters ‘?’, ‘+’, ‘{’, ‘|’, ‘(’, and ‘)’
+lose their special meaning; instead use the backslashed versions ‘\?’, ‘\+’, ‘\{’, ‘\|’, ‘\(’,
+and ‘\)’.
+
+  .         any character
+  *         more than one character
+  ?         Preceding optional character
+  ^         root to beginning of line
+  $         root to end of line
+  \d        Any digit
+  \D        Not a digit
+  \s        Any white space, tab, newline, space
+  \S        Not a white space
+  [abc]     only a,b, or c indiviudaully
+  [^abc]    not a, not b, and not c
+  {3}       The preceding character, exactly 3 times
+  {3,}      The preceding character, 3 or more times
+  (capture) The preceding expression will match up to it, then the ending
+            expression should terminate the group.
+
+
+  G(oo)+gle   will match any even number of o's
+  Go{0,6}gle  will match 0 to 6 number of o's
+================================================================================
+
+
+================================================================================
+- Advanced	Linux	commands:
+  o grep (difference	between	grep,	egrep,	fgrep)
+  o sed (substitution	command,	backreferencing)
+  o tr
+
+grep uses old regular expressions and intakes a file, or reads from stdout
+  grep ^[a-z] file.txt
+
+grep -E AKA egrep
+
+grep -F, --fixed-strings ALSO KNOWN AS fgrep
+  Interpret PATTERN as a list of fixed strings, separated by newlines, any of which is to be matched.
+
+
+sed
+  see examples page
+
+tr
+================================================================================
+
+================================================================================
+- Bash	scripting	(a	lot	of	material	here):
+  o different	constructs:	for	loops,	while	loops,	if	statements
+  o declaring	and	referencing	variables,	environment	variables,	etc.
+  o built-in	variable:	#,	?,	IFS,	1,	2,	etc.
+  o Types	of	quotes:	Single	vs.	double	quotes vs.	back	ticks
+
+STRING="Hello muhfuckas!"
+echo $STRING
+================================================================================
+#!/bin/bash
+
+echo "Hello, what is your name: "
+read name
+echo "Hello $name."
+
+echo "What are you favorite colours?"
+read -a colors
+
+for c in ${colors[@]}
+do
+    echo $c
+done
+
+
+for i in {0..5}
+do
+    if [ "$i" = 3 ]; then
+	echo "This is my favorite number"
+    fi
+    echo "Hello $i"
+done
+
+VAR=0
+while [ $VAR -lt 5 ]
+do
+    if [ $VAR -gt 3 ]; then
+	echo "$VAR"
+    fi
+    let VAR=VAR+1
+done
+
+# Variables$ $1, $2 $3, refer to the command lin args
+echo $1
+

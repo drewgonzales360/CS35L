@@ -1,0 +1,138 @@
+################################################################################
+Unix commands
+################################################################################
+
+
+================================================================================
+File System
+================================================================================
+  # find the files that have been edited 23 days ago
+  find . -mtime 23
+  find . -name 'play*'
+
+  # will find all the files in the current directory and list the oldest one
+  # at the bottom.
+  ls -alt
+
+  strace -c
+
+================================================================================
+Regex and Editing
+================================================================================
+  # grep takes a file name and an expression and prints it to stdout
+  egrep, grep -E
+  # regex expression has to be in single quotes
+  egrep '#' [filename]
+
+  Any character                 .
+  One or more of the previous   *
+  Root to beginning of line     ^
+  Root to end of line           $
+  In range                      [a-b]
+  Previous charact occurs       {2,5}
+================================================================================
+Users
+================================================================================
+  sudo useradd -d ~/ -m oracle
+  sudo passwd oracle # 321
+
+  # will turn on the setid bit
+  chmod 4777 filename.sh
+
+  # I added a group of users called guests
+  sudo groupadd guests
+  sudo groupdel guests
+
+  # add the user oracle to the group of guests
+  sudo usermod -G guests oracle
+  # will turn on the guid bit
+  # to delete the user from a group
+  sudo gpasswd -d oracle guests
+  chmod 2777 filename.txt
+  # change what group owns a file
+  chgrp groupname file/directory
+
+================================================================================
+Makefiles
+================================================================================
+  # write the default as the very first target.
+  target: dependencies
+    bash instructions
+
+
+================================================================================
+OpenSSH
+================================================================================
+	# Check if you even have OpenSSH
+		dpkg --get-selections | grep openssh
+
+	sudo apt-get install openssh-server
+	sudo apt-get install openssh-client
+
+	# This will generate a key and save it to /home/drew/.ssh/id_rsa
+	# There is no password on it
+	ssh-keygen
+
+	-d, --home-dir HOME_DIR
+	The new user will be created using HOME_DIR as the value
+	-for the user's login directory. The default is to append the LOGIN name to
+	-BASE_DIR and use that as the login directory name. The directory HOME_DIR does
+	-not have to exist but will not be created if it is missing.
+  -the home directory will have a desktop.ini, Documents, Pictures, Music
+    etc folders in it.
+	A home directory has to be associated with the new user added.
+
+  # Creates a key and saves it to ~/.ssh/id_rsa
+    ssh-keygen
+
+  # Make the new home directory for oracle. This will be the entry point for
+  # oracle. The .ssh is needed for the passwordless login. That took me a while
+  # to figure out.
+    mkdir ~/Documents/oracle
+    mkdir ~/Documents/oracle/.ssh
+
+
+  # Create the user, and set its home directory.
+    sudo useradd -d ~/Documents/oracle -m oracle
+
+  # Create oracles password
+    sudo passwd oracle
+
+  # Now that oracle is a user, change the home directory to oracles. I have to do
+  # this because when I'm logging in from the client for the first time, I'm going
+  # to do the ssh-copy-id and I need the .ssh to be owned by oracle, otherwise
+  # I'll get permission denied by the server.
+    chown -R oracle ~/Documents/oracle
+    chown -R oracle ~/Documents/oracle/.ssh
+
+  # Remove password authentication. This is super dangerous and I don't like it
+  # but whatever. PasswordAthentication no
+    sudo emacs /etc/ssh/sshd_config
+
+  # Creates a key and saves it to ~/.ssh/id_rsa
+    ssh-keygen
+
+  # This will copy my password 'keygen' to to ~/Documents/oracle/.ssh on the
+  # server. I think...
+    ssh-copy-id –i oracle@192.168.1.7
+
+  # SSH into the server
+    ssh -X oracle@192.168.1.7
+
+  # Was not prompted for password. Then opened xterm.
+    xterm
+
+  # Note that this can only be done for ubuntu systems. I have a bash shell on my
+  # windows 10 machine and X11 forwarding will not work
+
+
+================================================================================
+Diff and Patching
+================================================================================
+  # This will find the differences between a and b, where b is the 'newer' file
+  # so when I make a patch, I patch atext so it looks like btext
+  diff -u atext btext > patch
+
+  # You have to save the differences is a file though because diff doesn't
+  # do that for you.
+  patch < patch

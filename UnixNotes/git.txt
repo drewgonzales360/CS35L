@@ -1,0 +1,35 @@
+################################################################################
+Kenneth Drew Gonzales
+################################################################################
+# This will just stage everything then commit it.
+git commit -am "Commit Name"
+
+git add <filename>
+git commit
+git push
+
+# removes file from the repository.
+git rm --cached <file>
+
+# This is for starting a new repo
+echo "# UConfessions" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/kdrewgonzales/UConfessions.git
+git push -u origin master
+
+# to remove a remote repo
+get remote rm <remoteName>
+
+# this will list all files tracked by repo
+git ls-tree --full-tree -r HEAD
+
+#  list all branches
+git branch
+
+# switch branches
+get checkout <branchName>
+
+# make a new branch
+git branch <branchName>

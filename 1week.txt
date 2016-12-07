@@ -1,0 +1,84 @@
+################################################################################
+Week 1
+################################################################################
+
+================================================================================
+  Basic linux commands you need to kno and be comfortable with using these
+  commands without documentation
+
+  ls -a
+     This will list hidden files
+
+  ls -t
+     This will list them so that the oldest modified file is at the bottom
+     right before the next command can be entered
+
+  ls -l
+     This will list the full rwx for, the owner and group owner, the modified
+     last time.
+
+  mkdir
+     makes a new directory
+
+  rmdir
+     removes a directory. Will not work if some of the child files are in
+     use
+
+  find
+    Putting a ! before the command -type, or any other flag will do the opposite
+    -type
+      find . -type l
+      d for directory, f for plain text, l for symbolic link
+    -perm
+      find . -perm -220
+      find . -perm -g+w,u+w
+    -a time n
+      File was accessed n days ago, +n more than n days, -n less than n
+    -mtime n
+      File was modified n days ago, +n more than n days, -n less than n
+    -size n
+      File is n blocks big (a block is 512 bytes) +-n
+    -type c
+      Specifies file type: f=plain text, d=directory, l=symlink
+    -fstype typ
+      Specifies file system type: 4.2 or nfs
+    -name nam
+      The filename is nam. For regext stuff \*.c ya no quotes
+    -user usr
+      The file's owner is usr
+    -group grp
+      The file's group owner is grp
+    -perm p
+      The file's access mode is p (where p is an integer) 755, 644
+    -readable
+    -writeable
+    -executable
+================================================================================
+
+
+
+
+================================================================================
+Man Pages
+
+  man -k printf
+  Search the short descriptions and manual page names for the
+  keyword printf as regular expression.  Print out any matches.  Equivalent to
+  apropos -r printf.
+
+  /[pattern] will search for this pattern, n to go to next
+  ?[pattern] will search backwards, N to go to previous
+================================================================================
+
+================================================================================
+User Permissions
+  1 execute                                 0 Nothing
+  2 write                                   2 set GUID
+  4 read                                    4 set UUID
+  5 read and execute
+  6 read and write
+  7 read, write, execute
+
+  u owner, g group, o other
+  chmod -u=rws,g=rwx,o=rwx [filename]
+================================================================================
