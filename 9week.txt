@@ -7,3 +7,56 @@ Week 9:
 - Difference	between	dynamic	linking	and	dynamic	loading
 - Dynamic	Loading	API	(dlopen,	dlsym,	dlerror,	dlclose)
 ################################################################################
+
+Linux supports 2 types of libraries
+  Static .a files
+    Statically linked: the linker copies all library routines used in the program
+    into the final execuatable image at compile time.
+
+  Shared .so files
+    a pointer to the libary is put into the executable and when the executable
+    runs, I'll look for the directory where the library is.
+
+    Dynamically linked. Linux is responsible for loading the library upon
+    execution
+
+    Dynamically loaded
+      The library is used under program controll, the program has to selectively
+      call functions within the library.
+
+#include <dlfcn.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(){
+  void* lib;
+  double (*cosine)(double);
+  char* err;
+  lib = dlopen("/lib/libm.so.6", RTLD_NOW);
+
+  cosine = dlsym(lib, "cos");     // only load the cosine function from the lib.
+  double result = (*cosine)(3.0); // This will call the cosine function.
+  dlclose(lib);
+  return 0;
+}
+
+
+Creating Static Libraries
+  Create as many .o files as you want in the library
+  ar -rs  libname.a binary1.o binary2.o binary3.o
+
+  -s write the file to the archive where all the other libaries are.
+  -r insert files with replacement if they already exist.
+
+  then include the
+  #include <name.h>
+
+  Notice the name.h and libname.a
+
+Creating Dynamic Libraries
+  gcc -fPIC -c add.c
+  gcc -fPIC -c sub.c
+
+  gcc -shared -o libmymath.so add.o sub.o
+  ldconfig /usr/lib
+  gcc -o example main.o -lmymath
