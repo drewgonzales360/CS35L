@@ -21,8 +21,6 @@ Each thread gets Global Data, Code, Heap, Stack
 int pthread_create( pthread_t *tid, const pthread_attr_t *attr,
   void *(my_function)(void *), void *arg );
 
-
-
 tid:
   unique identifier for newly created thread
 attr:
@@ -31,3 +29,23 @@ my_function:
   function that thread will execute once it is created
 arg:
   a single argument that may be passed to my_function. Pass in NULL if no arguments
+
+////////////////////////////////////////////////////////////////////////////////
+#include <pthread.h>
+#include <stdio.h>
+void* threadFunc(void* targ);
+
+int main(){
+  pthread_t array[3];
+  for (size_t i = 0; i < 3; i++)
+    pthread_create(&array[i], NULL, threadFunc, &i);
+  for (size_t i = 0; i < 3; i++)
+    pthread_join(array[i], NULL);
+}
+
+void * threadFunc(void* targ){
+  int* v = (int*) targ;
+  int va = *v;
+  printf("Hello from thread %d!\n", va);
+}
+////////////////////////////////////////////////////////////////////////////////

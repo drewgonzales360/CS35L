@@ -7,3 +7,19 @@ Week 9:
 - Difference	between	dynamic	linking	and	dynamic	loading
 - Dynamic	Loading	API	(dlopen,	dlsym,	dlerror,	dlclose)
 ################################################################################
+
+Static Library
+  the linker copies all library routines used in the program into the final
+  executable image at compile-time
+
+Shared Librarys
+  The linking process is deferred until a program starts running.
+  The name of the library is placed in the final executable file
+  while the actual linking takes place at run time when both
+  executable file and library are placed in the memory.
+
+  dynamically-linked: Linux is responsible for loading library upon
+  execution.
+
+  dynamically-loaded: library is used under program control.
+  Program has to selectively call functions with the library.
