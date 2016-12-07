@@ -20,8 +20,6 @@ Week 3
 
 ================================================================================
 
-
-
 ================================================================================
 - Makefiles	(structure	of	rules,	how	does	make	work?)	and	the	build	process (configure,	make,
 make	install)
